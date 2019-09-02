@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "978471038592",
+    "firebase_url": "https://hobby-bc15c.firebaseio.com",
+    "project_id": "hobby-bc15c",
+    "storage_bucket": "hobby-bc15c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:978471038592:android:e480d9fc7e56535a",
+        "android_client_info": {
+          "package_name": "com.example.hobby_amity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "978471038592-on2tt26psjorot865v5fnvmsrc254efq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDto8qaVfojUI4JYM7oF9OkqU30zeZWN20"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "978471038592-on2tt26psjorot865v5fnvmsrc254efq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
