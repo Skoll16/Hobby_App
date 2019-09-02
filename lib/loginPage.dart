@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_core/firebase_core.dart';
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
 
@@ -6,6 +8,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  FirebaseDatabase mRef=FirebaseDatabase.instance;
   String _email,_password;
   @override
   Widget build(BuildContext context) {
@@ -16,44 +19,68 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              TextField(
-                decoration: InputDecoration(hintText: 'Email'),
-                onChanged: (value) {
-                  setState(() {
-                    _email = value;
-                  });
-                },
-              ),
+              // TextField(
+              //   decoration: InputDecoration(hintText: 'Email'),
+              //   onChanged: (value) {
+              //     setState(() {
+              //       _email = value;
+              //     });
+              //   },
+              // ),
+              // SizedBox(
+              //   height: 10,
+              // ),
+              // TextField(
+              //   decoration: InputDecoration(hintText: 'Password'),
+              //   onChanged: (value) {
+              //     setState(() {
+              //       _password = value;
+              //     });
+              //   },
+              //   obscureText: true,
+              // ),
               SizedBox(
                 height: 10,
               ),
-              TextField(
-                decoration: InputDecoration(hintText: 'Password'),
-                onChanged: (value) {
-                  setState(() {
-                    _password = value;
-                  });
+              RaisedButton(
+                child: Text(
+                  'User',
+                ),
+                color: Colors.blueAccent,
+                textColor: Colors.white,
+                elevation: 8,
+                onPressed: () {
+                   Navigator.pushNamed(context, '/signup');
                 },
-                obscureText: true,
               ),
               SizedBox(
                 height: 10,
               ),
               RaisedButton(
                 child: Text(
-                  'Login',
+                  'Admin',
                 ),
                 color: Colors.blueAccent,
                 textColor: Colors.white,
                 elevation: 8,
                 onPressed: () {
-                   
+                   Navigator.pushNamed(context, '/signupAdmin');
                 },
               ),
               SizedBox(
                 height: 10,
               ),
-              
+              RaisedButton(
+                child: Text(
+                  'Teacher',
+                ),
+                color: Colors.blueAccent,
+                textColor: Colors.white,
+                elevation: 8,
+                onPressed: () {
+                   Navigator.pushNamed(context, '/signupTeacher');
+                },
+              ),
             ],
           ),
         ),
