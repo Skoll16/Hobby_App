@@ -1,4 +1,3 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 class SignUpAdmin extends StatefulWidget {
@@ -9,14 +8,33 @@ class SignUpAdmin extends StatefulWidget {
 
 class _SignUpAdminState extends State<SignUpAdmin> {
   final DBRef=FirebaseDatabase.instance.reference();
+  
+     void checkLogin(){
+   
+     DBRef.child('Admin').child(_phoneNumber).once().then((DataSnapshot snapshot){
+        if(_email == snapshot.value['email'].toString()&&_password==snapshot.value['password'].toString()){
+             Navigator.of(context).pushReplacementNamed('/adminPage');
+
+
+        }
+      print(snapshot.value);
+                  
+     });
+     
+        
+   }
+  
   void writeData(){
     DBRef.child('Admin').child(_phoneNumber).set({
-     'email':_email,
-     'password':_password,
-     'phoneNumber':_phoneNumber
+     'name':_name,
+     'DOB':_date,
+       'gender':_gender,
+       'email':_email,
+      'phoneNumber':_phoneNumber,
+      'password':_password,
     });
   }
-  String _email,_password,_phoneNumber;
+  String _email,_password,_phoneNumber,_name,_date,_gender;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,6 +45,37 @@ class _SignUpAdminState extends State<SignUpAdmin> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               TextField(
+                decoration: InputDecoration(hintText: 'Name'),
+                onChanged: (value) {
+                  setState(() {
+                    _name= value;
+                  });
+                },
+              ),
+              SizedBox(
+                height: 10,),
+              TextField(
+                decoration: InputDecoration(hintText: 'Date of Birth'),
+                onChanged: (value) {
+                  setState(() {
+                    _date = value;
+                  });
+                },
+              ),
+               SizedBox(
+                height: 10,
+              ),
+              TextField(
+                decoration: InputDecoration(hintText: 'Gender'),
+                onChanged: (value) {
+                  setState(() {
+                    _gender = value;
+                  });
+                },
+              ),
+               SizedBox(
+                height: 10,
+              ),TextField(
                 decoration: InputDecoration(hintText: 'Email'),
                 onChanged: (value) {
                   setState(() {
@@ -34,16 +83,15 @@ class _SignUpAdminState extends State<SignUpAdmin> {
                   });
                 },
               ),
-              SizedBox(
-                height: 10,
-              ),TextField(
+              SizedBox(height: 10,),
+              TextField(
                 decoration: InputDecoration(hintText: 'Phone Number'),
                 onChanged: (value) {
                   setState(() {
                     _phoneNumber = value;
                   });
                 },
-              ),
+               ),
               SizedBox(height: 10,),
               TextField(
                 decoration: InputDecoration(hintText: 'Password'),
@@ -56,7 +104,7 @@ class _SignUpAdminState extends State<SignUpAdmin> {
               ),
               
                SizedBox(
-                height: 10,
+                height:40 ,
               ),
               RaisedButton(
                 child: Text(
@@ -66,7 +114,7 @@ class _SignUpAdminState extends State<SignUpAdmin> {
                 textColor: Colors.white,
                 elevation: 8,
                 onPressed: () {
-                  //Data();
+                 checkLogin();
                    
                 },
               ),SizedBox(

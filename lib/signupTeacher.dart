@@ -1,4 +1,3 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 class SignUpTeacher extends StatefulWidget {
@@ -10,18 +9,31 @@ class SignUpTeacher extends StatefulWidget {
 class _SignUpTeacherState extends State<SignUpTeacher> {
    final DBRef=FirebaseDatabase.instance.reference();
    void checkLogin(){
-    
-      /****/
+   // DBRef.child('teachers').child(_phoneNumber).once().then((DataSnapshot dataSnapshot){
+     DBRef.child('teachers').child(_phoneNumber).once().then((DataSnapshot snapshot){
+       if(_email == snapshot.value['email'].toString()&&_password==snapshot.value['password'].toString()){
+            Navigator.of(context).pushReplacementNamed('/mentorPage');
+
+
+       }
+                  
+     });
+     
+        
    }
   void writeData(){
     DBRef.child('teachers').child(_phoneNumber).set({
-      'email':_email,
+      'name':_name,
+      'DOB':_date,
+      'gender':_gender,
+       'email':_email,
       'password':_password,
-      'phoneNumber':_phoneNumber
+      'phoneNumber':_phoneNumber,
+      
     });
 
   }
-  String _email,_password,_phoneNumber;
+  String _email,_password,_phoneNumber,_date,_gender,_name;
   @override
   Widget build(BuildContext context) {
      return Scaffold(
@@ -32,6 +44,36 @@ class _SignUpTeacherState extends State<SignUpTeacher> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               TextField(
+                decoration: InputDecoration(hintText: 'Name'),
+                onChanged: (value) {
+                  setState(() {
+                    _name= value;
+                  });
+                },
+              ),
+              SizedBox(
+                height: 10,
+              ),TextField(
+                decoration: InputDecoration(hintText: 'Date of Birth'),
+                onChanged: (value) {
+                  setState(() {
+                    _date = value;
+                  });
+                },
+              ),
+               SizedBox(
+                height: 10,
+              ),TextField(
+                decoration: InputDecoration(hintText: 'Gender'),
+                onChanged: (value) {
+                  setState(() {
+                    _gender = value;
+                  });
+                },
+              ),
+               SizedBox(
+                height: 10,
+              ),TextField(
                 decoration: InputDecoration(hintText: 'Email'),
                 onChanged: (value) {
                   setState(() {
@@ -39,9 +81,7 @@ class _SignUpTeacherState extends State<SignUpTeacher> {
                   });
                 },
               ),
-              SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: 10,),
               TextField(
                 decoration: InputDecoration(hintText: 'Phone Number'),
                 onChanged: (value) {
@@ -49,7 +89,7 @@ class _SignUpTeacherState extends State<SignUpTeacher> {
                     _phoneNumber = value;
                   });
                 },
-              ),
+               ),
               SizedBox(height: 10,),
               TextField(
                 decoration: InputDecoration(hintText: 'Password'),
@@ -60,6 +100,7 @@ class _SignUpTeacherState extends State<SignUpTeacher> {
                 },
                 obscureText: true,
               ),
+              
                SizedBox(
                 height: 10,
               ),
@@ -71,11 +112,10 @@ class _SignUpTeacherState extends State<SignUpTeacher> {
                 textColor: Colors.white,
                 elevation: 8,
                 onPressed: () {
-                  checkLogin();
+                 checkLogin();
                    
                 },
-              ),
-              SizedBox(
+              ),SizedBox(
                 height: 10,
               ),
               RaisedButton(
@@ -90,7 +130,6 @@ class _SignUpTeacherState extends State<SignUpTeacher> {
                    
                 },
               ),
-             
             
             ],
           ),

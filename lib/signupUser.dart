@@ -8,16 +8,32 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+     void checkLogin(){
+   
+     DBRef.child('users').child(_phoneNumber).once().then((DataSnapshot snapshot){
+       if(_email == snapshot.value['email'].toString()&&_password==snapshot.value['password'].toString()){
+            Navigator.of(context).pushReplacementNamed('/userPage');
+
+
+       }
+                  
+     });
+     
+        
+   }
 
   void writeData(){
     DBRef.child('users').child(_phoneNumber).set({
-    'email':_email,
-    'password':_password,
-    'phoneNumber':_phoneNumber
+    'name':_name,
+      'D.O.B':_date,
+      'gender':_gender,
+       'email':_email,
+      'password':_password,
+      'phoneNumber':_phoneNumber,
     });
   }
   final DBRef=FirebaseDatabase.instance.reference();
-  String _email,_password,_phoneNumber;
+  String _email,_password,_phoneNumber,_name,_date,_gender;
   @override
   Widget build(BuildContext context) {
    return Scaffold(
@@ -28,6 +44,36 @@ class _SignUpPageState extends State<SignUpPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               TextField(
+                decoration: InputDecoration(hintText: 'Name'),
+                onChanged: (value) {
+                  setState(() {
+                    _name= value;
+                  });
+                },
+              ),
+              SizedBox(
+                height: 10,
+              ),TextField(
+                decoration: InputDecoration(hintText: 'Date of Birth'),
+                onChanged: (value) {
+                  setState(() {
+                    _date = value;
+                  });
+                },
+              ),
+               SizedBox(
+                height: 10,
+              ),TextField(
+                decoration: InputDecoration(hintText: 'Gender'),
+                onChanged: (value) {
+                  setState(() {
+                    _gender = value;
+                  });
+                },
+              ),
+               SizedBox(
+                height: 10,
+              ),TextField(
                 decoration: InputDecoration(hintText: 'Email'),
                 onChanged: (value) {
                   setState(() {
@@ -35,9 +81,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   });
                 },
               ),
-              SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: 10,),
               TextField(
                 decoration: InputDecoration(hintText: 'Phone Number'),
                 onChanged: (value) {
@@ -45,13 +89,13 @@ class _SignUpPageState extends State<SignUpPage> {
                     _phoneNumber = value;
                   });
                 },
-              ),
+               ),
               SizedBox(height: 10,),
               TextField(
                 decoration: InputDecoration(hintText: 'Password'),
                 onChanged: (value) {
                   setState(() {
-                    _password = value;
+                    _phoneNumber = value;
                   });
                 },
                 obscureText: true,
@@ -68,7 +112,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 textColor: Colors.white,
                 elevation: 8,
                 onPressed: () {
-                  //Data();
+                 checkLogin();
                    
                 },
               ),SizedBox(

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hobby_amity/Mentor.dart';
+import 'package:hobby_amity/adminPage.dart';
 import 'package:hobby_amity/signupAdmin.dart';
 import 'package:hobby_amity/signupTeacher.dart';
 import 'package:hobby_amity/signupUser.dart';
+import 'package:hobby_amity/userPage.dart';
 import 'loginPage.dart';
 
 void main()=>runApp(new MyApp());
@@ -23,10 +26,10 @@ class _MyAppState extends State<MyApp> {
      '/signup':(BuildContext context)=> new SignUpPage(),
      '/signupAdmin':(BuildContext context)=>new SignUpAdmin(),
      '/signupTeacher':(BuildContext context)=>new SignUpTeacher(),
-    // '/homepage':(BuildContext context)=>new HomePage(),
-    // '/phoneauth':(BuildContext context)=>new phoneAuth(),
-    // '/userInfo':(BuildContext context)=>new userInfo(),
-    },
+     '/adminPage':(BuildContext context)=>new AdminPage(),
+     '/userPage':(BuildContext context)=>new UserPage(),
+     '/mentorPage':(BuildContext context)=>new MentorPage(),
+      },
 
   );
   }

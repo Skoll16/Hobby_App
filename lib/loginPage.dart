@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_core/firebase_core.dart';
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
 
@@ -9,7 +8,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   FirebaseDatabase mRef=FirebaseDatabase.instance;
-  String _email,_password;
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,26 +18,7 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              // TextField(
-              //   decoration: InputDecoration(hintText: 'Email'),
-              //   onChanged: (value) {
-              //     setState(() {
-              //       _email = value;
-              //     });
-              //   },
-              // ),
-              // SizedBox(
-              //   height: 10,
-              // ),
-              // TextField(
-              //   decoration: InputDecoration(hintText: 'Password'),
-              //   onChanged: (value) {
-              //     setState(() {
-              //       _password = value;
-              //     });
-              //   },
-              //   obscureText: true,
-              // ),
+              
               SizedBox(
                 height: 10,
               ),
